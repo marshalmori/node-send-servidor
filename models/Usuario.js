@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const usuarioSchema = new Schema({
+const usuariosSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -21,4 +21,4 @@ const usuarioSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Usuarios", usuarioSchema);
+module.exports = mongoose.model("Usuarios", usuariosSchema);

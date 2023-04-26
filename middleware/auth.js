@@ -8,13 +8,17 @@ module.exports = (req, res, next) => {
     // Obtener el Token
     const token = authHeader.split(" ")[1];
 
-    try {
+    // console.log(token)
+
+    if (token) {
       // comprobar el JWT
-      const usuario = jwt.verify(token, process.env.SECRETA);
-      req.usuario = usuario;
-    } catch (error) {
-      console.log(error);
-      console.log("JWT no valido");
+      try {
+        const usuario = jwt.verify(token, process.env.SECRETA);
+        req.usuario = usuario;
+      } catch (error) {
+        console.log(error);
+        console.log("JWT no valido");
+      }
     }
   }
 
