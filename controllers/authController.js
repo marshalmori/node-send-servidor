@@ -2,6 +2,7 @@ const Usuario = require("../models/Usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+require("dotenv").config({ path: "variables.env" });
 
 exports.autenticarUsuario = async (req, res, next) => {
   // Revisar si hay errores
@@ -40,20 +41,5 @@ exports.autenticarUsuario = async (req, res, next) => {
 };
 
 exports.usuarioAutenticado = (req, res, next) => {
-  const authHeader = req.get("Authorization");
-
-  if (authHeader) {
-    // Obtener el Token
-    const token = authHeader.split(" ")[1];
-
-    try {
-      // comprobar el JWT
-      const usuario = jwt.verify(token, process.env.SECRETA);
-      res.json({ usuario });
-    } catch (error) {
-      console.log(error);
-      console.log("JWT no valido");
-    }
-  }
-  return next();
+  res.json({ usuario: req.usuario });
 };
