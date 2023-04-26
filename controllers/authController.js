@@ -39,4 +39,21 @@ exports.autenticarUsuario = async (req, res, next) => {
   }
 };
 
-exports.usuarioAutenticado = (req, res) => {};
+exports.usuarioAutenticado = (req, res, next) => {
+  const authHeader = req.get("Authorization");
+
+  if (authHeader) {
+    // Obtener el Token
+    const token = authHeader.split(" ")[1];
+
+    try {
+      // comprobar el JWT
+      const usuario = jwt.verify(token, process.env.SECRETA);
+      res.json({ usuario });
+    } catch (error) {
+      console.log(error);
+      console.log("JWT no valido");
+    }
+  }
+  return next();
+};
