@@ -18,6 +18,10 @@ router.post(
 
 router.get("/", enlacesController.todosEnlaces);
 
-router.get("/:url", enlacesController.obtenerEnlace);
+router.get(
+  "/:url",
+  enlacesController.tienePassword,
+  enlacesController.obtenerEnlace
+);
 
 module.exports = router;
